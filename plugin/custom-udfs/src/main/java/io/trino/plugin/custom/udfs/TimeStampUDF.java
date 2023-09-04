@@ -60,10 +60,10 @@ public class TimeStampUDF
         logger.info("precision: " + precision);
         logger.info("Long input (No. of microseconds since epoch): " + input);
 
-        long secondsInput = input / 1_000_000L;
+        long secondsInput = Math.floorDiv(input, 1_000_000L);
         logger.info("input seconds: " + secondsInput);
 
-        int microsOfSecondsInput = (int) (input % 1_000_000);
+        int microsOfSecondsInput = (int) Math.floorMod(input, 1_000_000L);
         int nanosOfSecondsInput = microsOfSecondsInput * 1000;
         logger.info("input nanosOfSeconds: " + nanosOfSecondsInput);
 
@@ -106,10 +106,10 @@ public class TimeStampUDF
         logger.info("LongTimestamp.getEpochMicros() input: " + input.getEpochMicros());
         logger.info("LongTimestamp.getPicosOfMicro() input: " + input.getPicosOfMicro());
 
-        long secondsInput = input.getEpochMicros() / 1_000_000L;
+        long secondsInput = Math.floorDiv(input.getEpochMicros(), 1_000_000L);
         logger.info("input seconds: " + secondsInput);
 
-        int microsOfSecondsInput = (int) (input.getEpochMicros() % 1_000_000);
+        int microsOfSecondsInput = (int) Math.floorMod(input.getEpochMicros(), 1_000_000L);
         int nanosOfSecondsInput = (microsOfSecondsInput * 1000) + (input.getPicosOfMicro() / 1000);
         logger.info("input nanosOfSeconds: " + nanosOfSecondsInput);
 
